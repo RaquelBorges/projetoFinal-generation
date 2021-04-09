@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 import { Produto } from '../Models/Produto';
 
 @Injectable({
@@ -32,6 +33,11 @@ export class ProdutoService {
     return this.httpClient.get<Produto[]>(`http://localhost:8080/produto/brecho/${id}`)
   }
 
+  getByIdCategoriaProdutos(id: number): Observable<Produto[]>{
+    return this.httpClient.get<Produto[]>(`http://localhost:8080/produto/categoria/${id}`)
+  }
+
+
   postProduto(produto:Produto): Observable<Produto>{
     return this.httpClient.post<Produto>('http://localhost:8080/produto', produto, this.token)
   }
@@ -40,8 +46,8 @@ export class ProdutoService {
     return this.httpClient.put<Produto>('http://localhost:8080/produto', produto, this.token)
   }
 
-  deleteTema(id:number){
-    return this.httpClient.delete (`http://localhost:8080/produto/brecho/${id}`, this.token)
+  deleteProduto(id:number){
+    return this.httpClient.delete (`http://localhost:8080/produto/${id}`, this.token)
   }
 
 
